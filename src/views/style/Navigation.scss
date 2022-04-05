@@ -1,0 +1,26 @@
+@use 'Colors';
+
+.nav {
+    width:30%;
+    
+    display: flex;
+    flex-direction: column;
+
+
+    border: 1px solid black;
+    background-color: Colors.$primary-green;
+    color: white;
+
+    .logo {
+        margin: 0 auto;
+        width: 100px;
+    }
+
+    .profile {
+        display: block;
+    }
+
+    .login {
+        display: block;
+    }
+}

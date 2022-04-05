@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './views/style/index.css'
-import App from './views/pages/Index'
+import './views/css/style.css'
 import Navigation from './views/pages/Navigation.jsx'
-import "bootstrap-icons/font/bootstrap-icons.css";
+import Login from './views/pages/Login.jsx'
 
 ReactDOM.render(
   <React.StrictMode>
     <Navigation />
-    <App />
+    <Login />
   </React.StrictMode>,
   document.getElementById('root')
 )
