@@ -15,5 +15,8 @@ Stack used:
     - Backend
         - Vite
         - mysql (database)
+        - sequelize (interacting with database)
+        - bcrypt (hashing passwords)
+        - jsonwebtoken (sessions)
 
 Notes on how this app works:
