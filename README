@@ -1,10 +1,12 @@
 To host this app on your local machine, follow these steps:
 
     1) Install node.js if not done already
-    2) Run the command 'npm install' to install all dependencies
-    3) Create a file in the root directory named '.env' and copy (and alter) the values from '.env.example'
-    4) Run 'npx vite' to host a development server
-    5) Follow link printed to console
+    2) Navigate to backend directory
+    3) run npm i
+    4) run npm dev
+    5) navigate to frontend directory
+    6) run npm i
+    7) run npm start
 
 Stack used:
 

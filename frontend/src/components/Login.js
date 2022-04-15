@@ -15,7 +15,7 @@ const Login = () => {
                 email: email,
                 password: password
             });
-            history.push("/dashboard");
+            history("/dashboard");
         } catch (error) {
             if (error.response) {
                 setMsg(error.response.data.msg);

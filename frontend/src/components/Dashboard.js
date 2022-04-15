@@ -10,21 +10,17 @@ const Dashboard = () => {
     const [users, setUsers] = useState([]);
     const history = useNavigate();
 
-    useEffect(() => {
-        refreshToken();
-        getUsers();
-    }, []);
-
     const refreshToken = async () => {
         try {
             const response = await axios.get('http://localhost:5000/token');
+            console.log(response.data.accessToken);
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setName(decoded.name);
             setExpire(decoded.exp);
         } catch(error) {
             if (error.response) {
-                history.push("/");
+                history("/");
             }
         }
     }
@@ -54,6 +50,11 @@ const Dashboard = () => {
         });
         setUsers(response.data);
     }
+
+    useEffect(() => {
+        refreshToken();
+        getUsers();
+    }, []);
 
     return (
         <div className="container mt-5">
