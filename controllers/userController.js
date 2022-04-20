@@ -10,35 +10,33 @@ exports.login = (req, res) => {
         const {email, password} = req.body;
 
         //get hashed password for compare
-        let hashedPassword = "";
         db.query("SELECT password FROM users WHERE email = ?", email, function(error, result, fields) {
             if (error) throw error;
             
-            hashedPassword = result;
-            //console.log(hashedPassword);
-        });
-        
-        if(email || password) {
-            //compare emails
-            db.query('SELECT * FROM users WHERE email = ?', email, function(error, results, fields) {
-                if (results.length > 0) {
-                    //compare password
-                    if (bcrypt.compare(password, hashedPassword.toString())) {
-                    req.session.loggedin = true;
-                    req.session.email = email;
-                    res.redirect('/');
+            const hashedPassword = result;
+            
+            if(email || password) {
+                //compare emails
+                db.query('SELECT * FROM users WHERE email = ?', email, function(error, results, fields) {
+                    if (error) throw (error );
+                    if (results.length > 0) {
+                        //compare password
+                        console.log("user password: " + password + ", hashed password: " + hashedPassword);
+                        if (bcrypt.compare(password, hashedPassword.toString())) {
+                        req.session.loggedin = true;
+                        req.session.email = email;
+                        res.redirect('/');
+                        }
+                    } else {
+                        res.send('Incorrect Username or Password');
                     }
-                } else {
-                    console.log("Before redirect: " + req.session.log);
-                    res.send('Incorrect Username or Password');
-                }
+                    res.end();
+                });
+            } else {
+                res.send('Please enter Username and Password');
                 res.end();
-            });
-        } else {
-            res.send('Please enter Username and Password');
-            res.end();
-        }
-
+            }
+        });
     } catch (error) {
         console.log(error);
     }
@@ -75,7 +73,7 @@ exports.register = (req, res) => {
 
             bcrypt.genSalt(saltRounds, function(err, salt) {
                 bcrypt.hash(password, salt, function(err, hash) {
-                    db.query('INSERT INTO users set ?', {username: username, email: email, password: hashedPassword, }, (error, result) => {
+                    db.query('INSERT INTO users set ?', {username: username, email: email, password: hash, }, (error, result) => {
 
                         if(error){
                             console.log(error);
