@@ -1,12 +1,8 @@
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const ejs = require('ejs');
-const layouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
-const mysql = require('mysql');
 const dotenv = require('dotenv');
+const fileUpload = require('express-fileupload');
 
 dotenv.config({ path: './.env'})
 
@@ -48,6 +44,9 @@ app.use(flash());
 
 // //static files
 app.use(express.static('views'));
+
+//use fileupload
+app.use(fileUpload());
 
 //Use routes
 app.use(mainRoutes);

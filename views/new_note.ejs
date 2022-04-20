@@ -1,0 +1,15 @@
+<html>
+    <%- include('./partials/head.ejs'); %>
+
+    <body>
+
+        <%- include('./partials/nav.ejs'); %>
+
+        <h1>Upload file here</h1>
+        <form name="submit" action="./new_note" method="post" enctype="multipart/form-data" id="uploadForm">
+            <input name="csv" type="file" />
+            <input type="submit" value="Upload" />
+        </form>
+    
+    </body>
+</html>

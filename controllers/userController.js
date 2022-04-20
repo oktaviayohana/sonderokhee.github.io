@@ -21,7 +21,6 @@ exports.login = (req, res) => {
                     if (error) throw (error );
                     if (results.length > 0) {
                         //compare password
-                        console.log("user password: " + password + ", hashed password: " + hashedPassword);
                         if (bcrypt.compare(password, hashedPassword.toString())) {
                         req.session.loggedin = true;
                         req.session.email = email;
