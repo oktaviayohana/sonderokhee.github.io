@@ -7,14 +7,14 @@ const fileUpload = require('express-fileupload');
 dotenv.config({ path: './.env'})
 
 //import database 
-const db = require('./db');
+// const db = require('./db');
 
-db.connect((err) => {
-    if(err){
-        throw err;
-    }
-    console.log('Connected');
-});
+// db.connect((err) => {
+//     if(err){
+//         throw err;
+//     }
+//     console.log('Connected');
+// });
 
 //initiate express
 const app = express();
