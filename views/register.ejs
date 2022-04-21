@@ -9,27 +9,37 @@
 
 
     <form class="regform" action="/user/register" method="POST">
+
+
+      <h3 class="centre">scribblenotes.io</h3>   
+      <br>
+      <h1 class="centre">Sign up to Scribble</h1>
+      <br>
+      <h6 class="centre form-label">Enter you email and password below</h6>
+      <br>
+
+
         <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
+            <label for="username" class="form-label">USERNAME</label>
             <input type="text" class="form-control" id="username" name="username">
           </div>
           
         <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
+          <label for="email" class="form-label">EMAIL ADDRESS</label>
           <input type="email" class="form-control" id="email" name="email">
         </div>
 
         <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label">PASSWORD</label>
           <input type="password" class="form-control" id="password" name="password">
         </div>
 
         <div class="mb-3">
-            <label for="password2" class="form-label">Confirm Password</label>
+            <label for="password2" class="form-label">CONFIRM PASSWORD</label>
             <input type="password" class="form-control" id="password2" name="password2">
           </div>
         
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn ">Submit</button>
 
         <br>
         <%- include ('./partials/messages.ejs'); %>

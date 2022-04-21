@@ -5,8 +5,9 @@
 
         <%- include('./partials/nav.ejs'); %>
 
-        <h1>Upload file here</h1>
-        <form name="submit" action="./new_note" method="post" enctype="multipart/form-data" id="uploadForm">
+        
+        <form name="submit" action="./new_note" method="post" enctype="multipart/form-data" id="uploadForm" class="regform">
+            <h1>Upload file here</h1>
             <input name="csv" type="file" />
             <input type="submit" value="Upload" />
         </form>
