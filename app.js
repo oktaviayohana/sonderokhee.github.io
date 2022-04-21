@@ -7,14 +7,14 @@ const fileUpload = require('express-fileupload');
 dotenv.config({ path: './.env'})
 
 //import database 
-// const db = require('./db');
+const db = require('./db');
 
-// db.connect((err) => {
-//     if(err){
-//         throw err;
-//     }
-//     console.log('Connected');
-// });
+db.connect((err) => {
+    if(err){
+        throw err;
+    }
+    console.log('Connected');
+});
 
 //initiate express
 const app = express();
@@ -53,8 +53,9 @@ app.use(mainRoutes);
 app.use('/user', user);
 
 //listen for requests
-app.listen(3000);
-console.log("App listening on http://localhost:3000/")
+const port = process.env.PORT || 3000
+app.listen(port);
+console.log("App listening on http://localhost:%d", port)
 
 // 404
 app.use((req, res) => {
