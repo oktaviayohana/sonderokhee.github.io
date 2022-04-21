@@ -4,7 +4,7 @@
   "description": "video-creation-software",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node index",
     "dev": "npx nodemon app"
   },
   "keywords": [
