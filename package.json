@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node index",
-    "dev": "npx nodemon app"
+    "dev": "npx nodemon app",
+    "build": "azure"
   },
   "keywords": [
     "video",
