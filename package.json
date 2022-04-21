@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "npx nodemon app",
-    "build": "next build && next export"
+    "dev": "npx nodemon app"
   },
   "keywords": [
     "video",
