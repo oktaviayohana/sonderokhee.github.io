@@ -4,8 +4,9 @@
   "description": "video-creation-software",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "npx nodemon app"
+    "start": "node index",
+    "dev": "npx nodemon app",
+    "build": "azure"
   },
   "keywords": [
     "video",
