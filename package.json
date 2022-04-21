@@ -1,7 +1,7 @@
 {
-  "name": "2ndunit-node",
+  "name": "scribblenotes",
   "version": "1.0.0",
-  "description": "video-creation-software",
+  "description": "scribblenotes application",
   "main": "app.js",
   "scripts": {
     "start": "node app",
