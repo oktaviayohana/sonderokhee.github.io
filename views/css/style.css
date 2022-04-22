@@ -1,18 +1,38 @@
 body {
-    background-color: beige;
-    
+    background-color: #E5E5E5;
 }
 
-nav {
-    background-color: blue;
+/* nav {
+    background-color: #005030;
     color: white;
     padding: 30px 60px;
     display: flex;
     justify-content: space-between;
+} */
+
+nav {
+    height: 100%;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #005030;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+.logo{
+    padding: auto;
+    margin: auto;
+    width: 60%;
+    height: auto;
 }
 
 nav ul {
-    display: flex;
+    z-index: 1;
+    position: absolute;
+    /* display: flex; */
     justify-content: space-around;
     align-items: center ;
 }
@@ -38,7 +58,42 @@ nav li a:hover {
 .regform {
     width: 30%;
     margin: auto;
-    background-color:lightgrey;
+    background-color:white;
     margin-top: 50px;
-    padding: 10px;
+    padding: 5%;
+    align-items: center;
+    z-index: 1;
+    border-radius: 2.5%;
+}
+
+.btn {
+    background-color: #027931;
+    border-color: #027931;
+    margin: auto;
+    width: 100%;
+    color: white;
+    box-shadow: 0px 5px 15px grey;
+    border-radius: 2.5%;
+}
+
+.btn:hover{
+    /* background-color: #F24913;
+    border-color: #F24913; */
+    box-shadow: 0px 2px 5px black;
+    color: white;
+}
+
+
+
+.form-label{
+    color: #9FA2B4;
+    /* font-family: mulish; */
+}
+
+
+
+/* custom classes */
+
+.centre {
+    text-align: center;
 }
