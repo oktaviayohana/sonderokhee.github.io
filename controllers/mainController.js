@@ -1,23 +1,39 @@
+const db = require("../db");
+
 exports.fileUpload = (req, res) => {
-    try {
-        let csvFile;
-        let uploadPath;
 
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).send('No files were uploaded.');
-        }
+    //handle no file upload
+    if(!req.files) return res.status(400).send('No files were uploaded')
 
-        csvFile = req.files.csv;
-        uplaodPath = __dirname + '/temp/' + csvFile.name;
+    const file = req.files.csv;
+    const filename = file.name;
 
-        // TODO update to upload to database
-        csvFile.mv(uploadPath, function(err) {
-            if (err)
-            return res.status(500).send(err)
+    console.log(file.mimetype)
+
+    //UPDATE TO CSV MIMETYPE
+    if (file.mimetype === 'application/vnd.ms-excel') {
+        file.mv('./public/files/csv_files/' + filename, (err) => {
+            if (err) {
+                console.log(err);
+                res.redirect('/')
+                return res.status(500);
+            }
+
+            //insert into db
+            var query = `INSERT INTO notes SET csv_file = '${filename}'`
+            db.query(query, {csv_file: filename}, function(err) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log(filename + ' successfully uploaded to database.')
+                }
+            });
+
+            
+
+            return res.redirect('/');
         });
-
-        res.send('File uploaded.')
-    } catch(error) {
-        console.log(error)
+    } else {
+        res.send("Please upload CSV filetype");
     }
 }

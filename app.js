@@ -3,8 +3,10 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
+const passport = require('passport-local');
 
-dotenv.config({ path: './.env'})
+dotenv.config({ path: './.env'});
 
 //import database 
 const db = require('./db');
@@ -18,6 +20,12 @@ db.connect((err) => {
 
 //initiate express
 const app = express();
+
+//body-parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 //to grab data from forms- parsing url encoded bodies as sent by html forms
 app.use(express.urlencoded({ extended: false}));
