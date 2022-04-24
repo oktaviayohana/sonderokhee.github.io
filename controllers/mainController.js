@@ -1,28 +1,39 @@
-
+const db = require("../db");
 
 exports.fileUpload = (req, res) => {
-    try {
-        let csvFile;
-        let uploadPath;
 
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).send('No files were uploaded.');
-        }
+    //handle no file upload
+    if(!req.files) return res.status(400).send('No files were uploaded')
 
-        csvFile = req.files.csv;
-        uploadPath = __dirname + "/temp/" + csvFile.name;
-        console.log(csvFile.name);
-        console.log("upload path: " + uploadPath);
+    const file = req.files.csv;
+    const filename = file.name;
 
-        // TODO update to upload to database
-        csvFile.mv(uploadPath, function(err) {
+    console.log(file.mimetype)
+
+    //UPDATE TO CSV MIMETYPE
+    if (file.mimetype === 'application/vnd.ms-excel') {
+        file.mv('./public/files/csv_files/' + filename, (err) => {
             if (err) {
-                return res.status(500).send(err)
+                console.log(err);
+                res.redirect('/')
+                return res.status(500);
             }
-        });
 
-        return res.send('File uploaded. (dev note: user would now be redirected to dashboard where they get a notification of success rather than seeing this message')
-    } catch(error) {
-        console.log(error)
+            //insert into db
+            var query = `INSERT INTO notes SET csv_file = '${filename}'`
+            db.query(query, {csv_file: filename}, function(err) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log(filename + ' successfully uploaded to database.')
+                }
+            });
+
+            
+
+            return res.redirect('/');
+        });
+    } else {
+        res.send("Please upload CSV filetype");
     }
 }

@@ -1,9 +1,6 @@
 const db = require('../db');
-const mysql = require('mysql');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { request } = require('express');
-const { response } = require('express');
+const passport = require('passport-local');
 
 exports.login = (req, res) => {
     try {
@@ -23,6 +20,9 @@ exports.login = (req, res) => {
                         //compare password
                         if (bcrypt.compare(password, hashedPassword.toString())) {
                         req.session.loggedin = true;
+                        
+                        
+
                         req.session.email = email;
                         res.redirect('/');
                         }
@@ -40,8 +40,6 @@ exports.login = (req, res) => {
         console.log(error);
     }
 }
-
-
 
 exports.register = (req, res) => {
     console.log(req.body);
@@ -89,6 +87,10 @@ exports.register = (req, res) => {
             });
         }
 
+
+exports.getLoggedInUser = (req, res) => {
+    //get user id where session id = session id
+}
 
         
 

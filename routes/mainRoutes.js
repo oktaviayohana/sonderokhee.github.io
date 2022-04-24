@@ -1,7 +1,5 @@
-const { response } = require('express');
-const { request } = require('express');
 const express = require('express');
-const { changeUser } = require('../db');
+const multer = require('multer');
 const mainController = require('../controllers/mainController')
 
 const router = express.Router();
@@ -9,7 +7,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    console.log(req.body.user)
+    console.log("Logged in user: " + req.body.user + " (this is seperate from session)")
     if (req.session.loggedin) {
         res.render('index', {
             user: req.body.user
@@ -35,7 +33,8 @@ router.get('/new_note', (req, res) => {
     res.render('new_note', { 
         title: 'scribblenotes',
         user: req.body.user
-     });
+    });
+    console.log("Logged in user: " + req.body.user + " (this is seperate from session)")
 });
 router.post('/new_note', mainController.fileUpload)
 
