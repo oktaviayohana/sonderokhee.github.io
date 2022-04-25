@@ -1,4 +1,5 @@
 const db = require("../db");
+const userController = require('./userController')
 
 exports.fileUpload = (req, res) => {
 
@@ -20,8 +21,9 @@ exports.fileUpload = (req, res) => {
             }
 
             //insert into db
-            var query = `INSERT INTO notes SET csv_file = '${filename}'`
-            db.query(query, {csv_file: filename}, function(err) {
+            var query = `INSERT INTO notes SET ?`
+            console.log('user email is: ' + email)
+            db.query(query, {csv_file: filename, user_id: userController.getUserIDfromEmail(email)}, function(err) {
                 if (err) {
                     throw err;
                 } else {

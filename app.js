@@ -4,7 +4,6 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
-const passport = require('passport-local');
 
 dotenv.config({ path: './.env'});
 

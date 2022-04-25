@@ -20,19 +20,8 @@ exports.login = (req, res) => {
                         //compare password
                         if (bcrypt.compareSync(password, hashedPassword.toString())) {
                             req.session.loggedin = true;
+                            req.session.email = email;
                             
-                            //get user ID, upload session ID to database
-                            db.query('SELECT user_id FROM users WHERE email = ?', email, function(error, result) {
-                                if (error) throw error;
-                                let user_id = result[0].user_id;
-
-                                //update db
-                                db.query('UPDATE users SET session_id = ? WHERE user_id = ?', [req.session.id, user_id], function(error) {
-                                    if (error) throw error;
-                                });
-
-                            });
-
                             //everything has been successfull, redirect to homepage
                             res.redirect('/');
                         } else {
@@ -102,10 +91,10 @@ exports.register = (req, res) => {
         }
 
 
-exports.getLoggedInUser = (req, res) => {
-    //get user id where session id = session id
+exports.getUserIDfromEmail = (email) => {
+    db.query('SELECT user_id FROM users WHERE email = ?', email, function(error, result) {
+        if (error) throw error;
+
+        return result[0].user_id
+    })
 }
-
-        
-
-    

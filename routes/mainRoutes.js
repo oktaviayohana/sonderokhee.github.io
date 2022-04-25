@@ -7,6 +7,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
+    console.log('user: ' + req.session.email)
     if (req.session.loggedin) {
         res.render('index', {
             user: req.body.user
@@ -23,17 +24,19 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+    console.log('session: ' + req.session.id)
     res.render('login', { 
         title: 'scribblenotes'
      });
 });
 
 router.get('/new_note', (req, res) => {
+    const email = req.session.email;
+    console.log('mainRouter: email is ' + email);
     res.render('new_note', { 
         title: 'scribblenotes',
         user: req.body.user
     });
-    console.log("Logged in user: " + req.body.user + " (this is seperate from session)")
 });
 router.post('/new_note', mainController.fileUpload)
 

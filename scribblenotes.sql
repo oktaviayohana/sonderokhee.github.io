@@ -15,18 +15,20 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
-  user_id int NOT NULL AUTO_INCREMENT,
+  user_id int NOT NULL AUTO_INCREMENT, --pk
   username VARCHAR(16) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(16) NOT NULL,
-  session_id VARCHAR(255),
   PRIMARY KEY (user_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS notes
 CREATE TABLE IF NOT EXISTS notes (
-  note_id int NOT NULL AUTO_INCREMENT,
+  note_id int NOT NULL AUTO_INCREMENT, --pk
   csv_file VARCHAR(255),
+  user_id int NOT NULL, --fk
   PRIMARY KEY (note_id)
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
 )
 
 COMMIT;
