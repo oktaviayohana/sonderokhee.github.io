@@ -7,7 +7,6 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    console.log("Logged in user: " + req.body.user + " (this is seperate from session)")
     if (req.session.loggedin) {
         res.render('index', {
             user: req.body.user
