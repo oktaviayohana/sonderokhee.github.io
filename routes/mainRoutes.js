@@ -20,6 +20,11 @@ router.get('/login', (req, res) => {
         title: 'scribblenotes'
      });
 });
+router.get('/logout', (req, res) => {
+    res.render('login', { 
+        title: 'scribblenotes'
+     });
+});
 
 router.get('/new_note', isAuthenticated, (req, res) => {
     res.render('new_note', { 
@@ -37,6 +42,20 @@ router.get('/about', (req, res) => {
         user: req.body.user
      });
 });
+
+router.get('/settings', (req, res) => {
+    res.render('settings', { 
+        title: 'Settings',
+        user: req.body.user
+     });
+});
+router.get('/admin', (req, res) => {
+    res.render('admin_dashboard', { 
+        title: 'Admin',
+        user: req.body.user
+     });
+});
+
 
 router.get('/contact', (req, res) => {
     res.render('contact', { 

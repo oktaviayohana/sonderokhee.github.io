@@ -1,6 +1,15 @@
 const db = require('../db');
 const bcrypt = require('bcryptjs');
 
+// logout user and redirect to homepage
+exports.logout = (req, res) => {
+    req.session.destroy(function(err) {
+        res.redirect('/');
+    });
+}
+
+
+
 exports.register = (req, res) => {
     console.log(req.body);
     
