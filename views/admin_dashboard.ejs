@@ -4,9 +4,47 @@
         <title>Admin Dashboard</title>
     </head>
     <body>
-        <%- include('./partials/nav.ejs'); %>
-        <h1>Admin Dashboard</h1>
-
-        <%- include('./partials/footer.ejs'); %>
+        <%- include('./partials/nav.ejs');  %>
+        <!--Track Note Order Status-->
+        <div class="content">
+            <h1 style="text-align: center;">Track Note Order Status</h1>
+            <br>
+            <!--settings page-->
+            <div class="settings-page">
+                <div class="settings-container">
+                    <div class="settings-item">
+                        <h3>Track Note Order Status</h3>
+                        <form action="#" method="POST">
+                            <input type="text" name="order_id" placeholder="Order ID" required>
+                            <input type="submit" value="Track Order">
+                            <!--display order-->
+                            <div class="order-status">
+                                <h3>Order Status</h3>
+                                <p>Order ID: <span id="order_id"></span></p>
+                                <p>Order Status: <span id="order_status"></span></p>
+                                <p>Order Date: <span id="order_date"></span></p>
+                                <p>Order Time: <span id="order_time"></span></p>
+                                <p>Order Total: <span id="order_total"></span></p>
+                                <p>Order Items: <span id="order_items"></span></p>
+                                <!--options for order update-->
+                                <div class="order-status-options">
+                                    <form action="#" method="POST">
+                                        <input type="submit" value="Update Order Status" id="update_order_status">
+                                        <select name="order_status" id="order_status_select">
+                                            <option value="pending">Pending</option>
+                                            <option value="processing">Processing</option>
+                                            <option value="on-hold">On Hold</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="cancelled">Cancelled</option>
+                                            <option value="refunded">Refunded</option>
+                                            <option value="failed">Failed</option>
+                                        </select>
+                                    </form>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/footer.ejs');  %>
     </body>
 </html>

@@ -45,6 +45,12 @@ router.get('/settings', (req, res) => {
         user: req.body.user
      });
 });
+router.get('/admin', (req, res) => {
+    res.render('admin_dashboard', { 
+        title: 'Admin',
+        user: req.body.user
+     });
+});
 
 
 router.get('/contact', (req, res) => {
