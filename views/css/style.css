@@ -20,7 +20,7 @@ nav {
     background-color: #005030;
     overflow-x: hidden;
     padding-top: 20px;
-  }
+}
 
 .logo{
     padding: auto;
@@ -96,4 +96,84 @@ nav li a:hover {
 
 .centre {
     text-align: center;
+}
+
+
+
+.container {
+    margin-top: 10%;
+    width: 40%;
+    height: 60%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+
+.new-note-btn{
+    background-color: #027931;
+    border-color: #027931;
+    margin: auto;
+    width: 100%;
+    color: white;
+    box-shadow: 0px 5px 15px grey;
+    border-radius: 2.5%;
+}
+
+.new-note-btn:hover{
+    /* background-color: #F24913;
+    border-color: #F24913; */
+    box-shadow: 0px 2px 5px black;
+    color: white;
+}
+
+.content {
+    margin-top: 10%;
+    width: 40%;
+    height: 60%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: auto;
+}
+
+.new-campaign-btn{
+    background-color: #F24913;
+    border-color: #F24913;
+    margin: auto;
+    width: 100%;
+    color: white;
+    box-shadow: 0px 5px 15px grey;
+    border-radius: 2.5%;
+}
+
+.new-campaign-btn:hover{
+    /* background-color: #F24913;
+    border-color: #F24913; */
+    box-shadow: 0px 2px 5px black;
+    color: white;
+}
+
+
+.title{
+    text-align: center;
+    padding: 5%;
+}
+
+.text{
+    text-align: center;
+}
+
+
+
+
+
+.custom-file-upload {
+    background-color: #9FA2B4;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }

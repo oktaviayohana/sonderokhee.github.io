@@ -1,14 +1,24 @@
+const { response } = require("express");
 const db = require("../db");
+const userController = require('./userController')
 
 exports.fileUpload = (req, res) => {
 
     //handle no file upload
     if(!req.files) return res.status(400).send('No files were uploaded')
 
+    //define local variables
     const file = req.files.csv;
     const filename = file.name;
+    const email = req.session.email;
+    const user_id = userController.getUserIDfromEmail(email);
 
-    console.log(file.mimetype)
+    console.log('email is ' + email + ', user_id ' + user_id);
+
+    //check if email exists
+    if (!email || !user_id) {
+        return res.send('No user logged in. (this may be a bug)')
+    }
 
     //UPDATE TO CSV MIMETYPE
     if (file.mimetype === 'application/vnd.ms-excel') {
@@ -20,8 +30,7 @@ exports.fileUpload = (req, res) => {
             }
 
             //insert into db
-            var query = `INSERT INTO notes SET csv_file = '${filename}'`
-            db.query(query, {csv_file: filename}, function(err) {
+            db.query(`INSERT INTO notes SET ?`, {csv_file: filename, user_id: user_id }, function(err) {
                 if (err) {
                     throw err;
                 } else {

@@ -28,6 +28,7 @@
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
+    "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "tls": "^0.0.1"
   }

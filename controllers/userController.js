@@ -2,44 +2,47 @@ const db = require('../db');
 const bcrypt = require('bcryptjs');
 const passport = require('passport-local');
 
-exports.login = (req, res) => {
-    try {
-        const {email, password} = req.body;
+// exports.login = (req, res) => {
+//     try {
+//         const {email, password} = req.body;
 
-        //get hashed password for compare
-        db.query("SELECT password FROM users WHERE email = ?", email, function(error, result, fields) {
-            if (error) throw error;
+//         //get hashed password for compare
+//         db.query("SELECT password FROM users WHERE email = ?", email, function(error, result) {
+//             if (error) throw error;
             
-            const hashedPassword = result;
+//             const hashedPassword = result[0].password;
             
-            if(email || password) {
-                //compare emails
-                db.query('SELECT * FROM users WHERE email = ?', email, function(error, results, fields) {
-                    if (error) throw (error );
-                    if (results.length > 0) {
-                        //compare password
-                        if (bcrypt.compare(password, hashedPassword.toString())) {
-                        req.session.loggedin = true;
-                        
-                        
-
-                        req.session.email = email;
-                        res.redirect('/');
-                        }
-                    } else {
-                        res.send('Incorrect Username or Password');
-                    }
-                    res.end();
-                });
-            } else {
-                res.send('Please enter Username and Password');
-                res.end();
-            }
-        });
-    } catch (error) {
-        console.log(error);
-    }
-}
+//             if(email || password) {
+//                 //compare emails
+//                 db.query('SELECT * FROM users WHERE email = ?', email, function(error, results) {
+//                     if (error) throw (error );
+//                     if (results.length > 0) {
+//                         //compare password
+//                         if (bcrypt.compareSync(password, hashedPassword.toString())) {
+//                             req.session.loggedin = true;
+//                             req.session.email = email;
+                            
+//                             //everything has been successfull, redirect to homepage
+//                             res.redirect('/');
+//                         } else {
+//                             //no password found
+//                             res.send('Incorrect Username or Password');
+//                         }
+//                     } else {
+//                         //no email found
+//                         res.send('Incorrect Username or Password');
+//                     }
+//                     res.end();
+//                 });
+//             } else {
+//                 //no data entered
+//                 res.send('Please enter Username and Password');
+//             }
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 exports.register = (req, res) => {
     console.log(req.body);
@@ -88,10 +91,11 @@ exports.register = (req, res) => {
         }
 
 
-exports.getLoggedInUser = (req, res) => {
-    //get user id where session id = session id
+exports.getUserIDfromEmail = async function(email) {
+    let queryPromise = await db.query('SELECT user_id FROM users WHERE email = ?', email, function(error, result) {
+        if (error) throw error;
+
+        console.log('getUserID -> db.query(): result is ' + result[0].user_id);
+        return result[0].user_id;
+    });
 }
-
-        
-
-    

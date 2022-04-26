@@ -4,7 +4,7 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
-const passport = require('passport-local');
+const passport = require('passport')
 
 dotenv.config({ path: './.env'});
 
@@ -47,6 +47,11 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+//passport
+require('./auth/passport')(passport)
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(flash());
 

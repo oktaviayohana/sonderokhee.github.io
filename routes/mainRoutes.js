@@ -1,20 +1,13 @@
 const express = require('express');
-const multer = require('multer');
 const mainController = require('../controllers/mainController')
+const passport = require("passport");
 
 const router = express.Router();
 
-
-
 router.get('/', (req, res) => {
-    console.log("Logged in user: " + req.body.user + " (this is seperate from session)")
-    if (req.session.loggedin) {
-        res.render('index', {
-            user: req.body.user
-        })
-    } else {
-        res.redirect('/login')
-    }
+    
+    console.log(req.isAuthenticated);
+    res.render('index')
 });
 
 router.get('/register', (req, res) => {
@@ -34,9 +27,10 @@ router.get('/new_note', (req, res) => {
         title: 'scribblenotes',
         user: req.body.user
     });
-    console.log("Logged in user: " + req.body.user + " (this is seperate from session)")
 });
-router.post('/new_note', mainController.fileUpload)
+router.post('/new_note', mainController.fileUpload, (req, res) => {
+    console.log(req.user);
+});
 
 router.get('/about', (req, res) => {
     res.render('about', { 
