@@ -39,6 +39,14 @@ router.get('/about', (req, res) => {
      });
 });
 
+router.get('/settings', (req, res) => {
+    res.render('settings', { 
+        title: 'Settings',
+        user: req.body.user
+     });
+});
+
+
 router.get('/contact', (req, res) => {
     res.render('contact', { 
         title: 'scribblenotes',
