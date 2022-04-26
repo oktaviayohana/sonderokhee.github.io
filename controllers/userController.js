@@ -44,6 +44,18 @@ const passport = require('passport-local');
 //     }
 // }
 
+// logout user
+exports.logout = (req, res) => {
+    req.session.destroy(function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/');
+        }
+    });
+}
+
+
 exports.register = (req, res) => {
     console.log(req.body);
     
