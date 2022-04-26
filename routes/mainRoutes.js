@@ -1,13 +1,12 @@
 const express = require('express');
-const mainController = require('../controllers/mainController')
-const passport = require("passport");
+const mainController = require('../controllers/mainController');
+const passport = require('passport')
+const { isAuthenticated } = require('../auth/isAuthenticated');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    
-    console.log(req.isAuthenticated);
-    res.render('index')
+router.get('/', isAuthenticated, (req, res) => {
+    res.render('index', { user: req.user})
 });
 
 router.get('/register', (req, res) => {
@@ -27,7 +26,7 @@ router.get('/logout', (req, res) => {
      });
 });
 
-router.get('/new_note', (req, res) => {
+router.get('/new_note', isAuthenticated, (req, res) => {
     res.render('new_note', { 
         title: 'scribblenotes',
         user: req.body.user
@@ -63,6 +62,12 @@ router.get('/contact', (req, res) => {
         title: 'scribblenotes',
         user: req.body.user
      });
+});
+
+router.get('/logout', function(req, res, next) {
+    console.log('hi');
+    req.logout();
+    res.redirect('/');
 });
 
 module.exports = router;
