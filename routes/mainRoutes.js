@@ -39,13 +39,13 @@ router.get('/about', (req, res) => {
      });
 });
 
-router.get('/settings', (req, res) => {
+router.get('/settings',isAuthenticated, (req, res) => {
     res.render('settings', { 
         title: 'Settings',
         user: req.body.user
      });
 });
-router.get('/admin', (req, res) => {
+router.get('/admin',isAuthenticated, (req, res) => {
     res.render('admin_dashboard', { 
         title: 'Admin',
         user: req.body.user
