@@ -24,10 +24,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 DROP TABLE IF EXISTS notes
 CREATE TABLE IF NOT EXISTS notes (
-  note_id int NOT NULL AUTO_INCREMENT, --pk
+  note_id int NOT NULL AUTO_INCREMENT,
   csv_file VARCHAR(255),
-  user_id int NOT NULL, --fk
-  PRIMARY KEY (note_id)
+  user_id int NOT NULL,
+  PRIMARY KEY (note_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 )
 
