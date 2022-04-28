@@ -6,7 +6,7 @@ const { isAuthenticated } = require('../auth/isAuthenticated');
 const router = express.Router();
 
 router.get('/', isAuthenticated, (req, res) => {
-    res.render('index', { user: req.user})
+    res.render('index', { user: req.user});
 });
 
 router.get('/register', (req, res) => {
@@ -27,13 +27,10 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/new_note', isAuthenticated, (req, res) => {
-    res.render('new_note', { 
-        title: 'scribblenotes',
-        user: req.body.user
-    });
+    res.render('new_note', { user: req.user });
 });
-router.post('/new_note', mainController.fileUpload, (req, res) => {
-    console.log(req.user);
+router.post('/new_note', isAuthenticated, mainController.fileUpload, function(req, res) {
+    console.log(req.user)
 });
 
 router.get('/about', (req, res) => {

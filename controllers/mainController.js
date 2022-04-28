@@ -4,19 +4,16 @@ const userController = require('./userController')
 
 exports.fileUpload = (req, res) => {
 
+    //local variable
+    const file = req.files.csv;
+    const filename = req.files.csv.name;
+    const user_id = req.user.id;
+
     //handle no file upload
     if(!req.files) return res.status(400).send('No files were uploaded')
 
-    //define local variables
-    const file = req.files.csv;
-    const filename = file.name;
-    const email = req.session.email;
-    const user_id = userController.getUserIDfromEmail(email);
-
-    console.log('email is ' + email + ', user_id ' + user_id);
-
     //check if email exists
-    if (!email || !user_id) {
+    if (!user_id) {
         return res.send('No user logged in. (this may be a bug)')
     }
 
