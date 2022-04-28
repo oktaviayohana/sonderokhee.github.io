@@ -1,7 +1,7 @@
 const express = require('express');
 const mainController = require('../controllers/mainController');
-const passport = require('passport')
 const { isAuthenticated } = require('../auth/isAuthenticated');
+const adminController = require('../controllers/adminController');
 
 const router = express.Router();
 
@@ -43,13 +43,14 @@ router.get('/about', (req, res) => {
 router.get('/settings', (req, res) => {
     res.render('settings', { 
         title: 'Settings',
-        user: req.body.user
+        user: req.user
      });
 });
 router.get('/admin', (req, res) => {
     res.render('admin_dashboard', { 
         title: 'Admin',
-        user: req.body.user
+        user: req.user,
+        allNotes: adminController.getAllUncompletedNotes()
      });
 });
 

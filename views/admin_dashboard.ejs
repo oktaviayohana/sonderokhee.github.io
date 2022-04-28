@@ -21,6 +21,11 @@
                             <!--display order-->
                             <div class="order-status">
                                 
+                                <!-- display all current notes -->
+                                <% for( let index = 0; index < allNotes.length; index++ ) {
+                                    console.log('current note index: ' + allNotes[index]);
+                                 } %>
+
                                 <!--options for order update-->
                                 <div class="order-status-options">
                                     <form action="#" method="POST">

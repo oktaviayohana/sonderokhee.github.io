@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS notes (
   note_id int NOT NULL AUTO_INCREMENT,
   csv_file VARCHAR(255),
   user_id int NOT NULL,
+  note_status VARCHAR(32),
   PRIMARY KEY (note_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 )

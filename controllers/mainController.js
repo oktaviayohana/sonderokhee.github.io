@@ -6,7 +6,6 @@ exports.fileUpload = (req, res) => {
 
     //local variable
     const file = req.files.csv;
-    const filename = req.files.csv.name;
     const user_id = req.user.id;
 
     //handle no file upload
@@ -19,26 +18,36 @@ exports.fileUpload = (req, res) => {
 
     //UPDATE TO CSV MIMETYPE
     if (file.mimetype === 'application/vnd.ms-excel') {
-        file.mv('./public/files/csv_files/' + filename, (err) => {
-            if (err) {
-                console.log(err);
-                res.redirect('/')
-                return res.status(500);
-            }
 
-            //insert into db
-            db.query(`INSERT INTO notes SET ?`, {csv_file: filename, user_id: user_id }, function(err) {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log(filename + ' successfully uploaded to database.')
-                }
-            });
 
+        //insert into db
+        let note_id;
+        db.query(`INSERT INTO notes SET ?`, {filename: req.files.csv.name, user_id: user_id, note_status: 'pending' }, function(err, result) {
+            if (err) throw err;
             
+            // rename file to format 'note*id*_user*id*
+            note_id = result.insertId
+            const new_filename = 'note' + note_id + '_user' + user_id + '.csv'
 
-            return res.redirect('/');
+            //update in DB
+            db.query('UPDATE notes SET filename = ? WHERE note_id = ?', [ new_filename, note_id ], function(err) {
+                if (err) throw err;
+
+                //move to uploads folder
+                file.mv('./uploads/notes_files/' + new_filename, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.redirect('/');
+                        return res.status(500);
+                    }
+
+                    console.log(new_filename + ' successfully uploaded to database.');
+                    
+                    res.redirect('/');
+                });
+            });
         });
+
     } else {
         res.send("Please upload CSV filetype");
     }
