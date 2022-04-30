@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <link rel="stylesheet" href="../../css/card.css">
     </head>
     <body>
-        <div>
-            <h1>Note from user *replace this*</h1> 
+        <div class='card'>
+            <h1>
+                Note id: <%- note.note_id %>
+                <br>
+                User id: <%- note.user_id %>
+                <br>
+                User: <%-  await userController.getUserFromID(note.user_id).username %>
+            </h1>
         </div>
     </body>
 </html>

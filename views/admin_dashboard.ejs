@@ -22,9 +22,9 @@
                             <div class="order-status">
                                 
                                 <!-- display all current notes -->
-                                <% for( let index = 0; index < allNotes.length; index++ ) {
-                                    console.log('current note index: ' + allNotes[index]);
-                                 } %>
+                                <% allNotes.forEach(element => { %>
+                                 <%- include('partials/admin/note_card', {note: element, userController: userController}); %>
+                                <% }) %>
 
                                 <!--options for order update-->
                                 <div class="order-status-options">
