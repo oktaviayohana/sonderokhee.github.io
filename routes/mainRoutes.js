@@ -20,11 +20,7 @@ router.get('/login', (req, res) => {
         title: 'scribblenotes'
      });
 });
-router.get('/logout', (req, res) => {
-    res.render('login', { 
-        title: 'scribblenotes'
-     });
-});
+
 
 router.get('/new_note', isAuthenticated, (req, res) => {
     res.render('new_note', { user: req.user });
@@ -40,7 +36,7 @@ router.get('/about', (req, res) => {
      });
 });
 
-router.get('/settings', (req, res) => {
+router.get('/settings',isAuthenticated, (req, res) => {
     res.render('settings', { 
         title: 'Settings',
         user: req.user
