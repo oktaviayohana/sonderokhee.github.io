@@ -1,47 +1,52 @@
-const { response } = require("express");
 const db = require("../db");
-const userController = require('./userController')
+const mysql = require('mysql');
 
 exports.fileUpload = (req, res) => {
+
+    //local variable
+    const file = req.files.csv;
+    const user_id = req.user.id;
 
     //handle no file upload
     if(!req.files) return res.status(400).send('No files were uploaded')
 
-    //define local variables
-    const file = req.files.csv;
-    const filename = file.name;
-    const email = req.session.email;
-    const user_id = userController.getUserIDfromEmail(email);
-
-    console.log('email is ' + email + ', user_id ' + user_id);
-
     //check if email exists
-    if (!email || !user_id) {
+    if (!user_id) {
         return res.send('No user logged in. (this may be a bug)')
     }
 
     //UPDATE TO CSV MIMETYPE
     if (file.mimetype === 'application/vnd.ms-excel') {
-        file.mv('./public/files/csv_files/' + filename, (err) => {
-            if (err) {
-                console.log(err);
-                res.redirect('/')
-                return res.status(500);
-            }
 
-            //insert into db
-            db.query(`INSERT INTO notes SET ?`, {csv_file: filename, user_id: user_id }, function(err) {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log(filename + ' successfully uploaded to database.')
-                }
-            });
 
+        //insert into db
+        let note_id;
+        db.query(`INSERT INTO notes SET ?`, {filename: mysql.escape(req.files.csv.name), user_id: user_id, note_status: 'pending' }, function(err, result) {
+            if (err) throw err;
             
+            // rename file to format 'note*id*_user*id*
+            note_id = result.insertId
+            const new_filename = 'note' + note_id + '_user' + user_id + '.csv'
 
-            return res.redirect('/');
+            //update in DB
+            db.query('UPDATE notes SET filename = ? WHERE note_id = ?', [ new_filename, note_id ], function(err) {
+                if (err) throw err;
+
+                //move to uploads folder
+                file.mv('./uploads/notes_files/' + new_filename, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.redirect('/');
+                        return res.status(500);
+                    }
+
+                    console.log(new_filename + ' successfully uploaded to database.');
+                    
+                    res.redirect('/');
+                });
+            });
         });
+
     } else {
         res.send("Please upload CSV filetype");
     }

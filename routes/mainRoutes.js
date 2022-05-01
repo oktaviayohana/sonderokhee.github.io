@@ -1,12 +1,12 @@
 const express = require('express');
 const mainController = require('../controllers/mainController');
-const passport = require('passport')
 const { isAuthenticated } = require('../auth/isAuthenticated');
-
+const adminController = require('../controllers/adminController');
+const userController = require('../controllers/userController');
 const router = express.Router();
 
 router.get('/', isAuthenticated, (req, res) => {
-    res.render('index', { user: req.user})
+    res.render('index', { user: req.user});
 });
 
 router.get('/register', (req, res) => {
@@ -23,13 +23,10 @@ router.get('/login', (req, res) => {
 
 
 router.get('/new_note', isAuthenticated, (req, res) => {
-    res.render('new_note', { 
-        title: 'scribblenotes',
-        user: req.body.user
-    });
+    res.render('new_note', { user: req.user });
 });
-router.post('/new_note', mainController.fileUpload, (req, res) => {
-    console.log(req.user);
+router.post('/new_note', isAuthenticated, mainController.fileUpload, function(req, res) {
+    console.log(req.user)
 });
 
 router.get('/about', (req, res) => {
@@ -42,14 +39,17 @@ router.get('/about', (req, res) => {
 router.get('/settings',isAuthenticated, (req, res) => {
     res.render('settings', { 
         title: 'Settings',
-        user: req.body.user
+        user: req.user
      });
 });
-router.get('/admin',isAuthenticated, (req, res) => {
-    res.render('admin_dashboard', { 
+
+router.get('/admin', async (req, res) => {
+    res.render('admin_dashboard', {
         title: 'Admin',
-        user: req.body.user
-     });
+        user: req.user,
+        userController: userController,
+        noteCardInformation: await adminController.getAllNoteCardInformation()
+    })
 });
 
 
