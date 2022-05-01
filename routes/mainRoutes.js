@@ -4,7 +4,6 @@ const { isAuthenticated } = require('../auth/isAuthenticated');
 const adminController = require('../controllers/adminController');
 const userController = require('../controllers/userController');
 const router = express.Router();
-const aejs = require('async-ejs')
 
 router.get('/', isAuthenticated, (req, res) => {
     res.render('index', { user: req.user});
@@ -47,25 +46,14 @@ router.get('/settings', (req, res) => {
         user: req.user
      });
 });
-router.get('/admin', async (req, res) => {
-    let data = await userController.getUserFromID(1)
-    console.log('router: ' + data.username)
 
-    // UPTO HERE
-    //
-    //  need to render async data with ejs. hmmmmm
-    res.render = function() {
-        aejs.renderFile('index.ejs', {}, {}, function(err, str) {
-            if (err) console.log(error);
-        })
-    }
-    
-    // res.render('admin_dashboard', { 
-    //     title: 'Admin',
-    //     user: req.user,
-    //     userController: userController,
-    //     allNotes: await adminController.getAllUncompletedNotes(),
-    // })
+router.get('/admin', async (req, res) => {
+    res.render('admin_dashboard', {
+        title: 'Admin',
+        user: req.user,
+        userController: userController,
+        noteCardInformation: await adminController.getAllNoteCardInformation()
+    })
 });
 
 

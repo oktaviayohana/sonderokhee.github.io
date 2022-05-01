@@ -5,13 +5,15 @@
     </head>
     <body>
         <div class='card'>
-            <h1>
-                Note id: <%- note.note_id %>
+            <p> 
+                Note id: <%- note_id %>
                 <br>
-                User id: <%- note.user_id %>
+                User id: <%- user_id %>
                 <br>
-                User: <%-  await userController.getUserFromID(note.user_id).username %>
-            </h1>
+                User: <%- username %>
+                <br>
+                Email: <%- email %>
+            </p>
         </div>
     </body>
 </html>
