@@ -8,11 +8,15 @@ module.exports = function(passport) {
         //find user
         db.query("SELECT * FROM users WHERE email = ?", [ email ], function(error, result) {
             if (error) { return done(err); }
-            if (!result[0]) { return done(null, false); }
+            if (!result[0]) {
+              console.log("user object doesn't exists") 
+              return done(null, false);
+             }
       
             //verify password
             const hashedPassword = result[0].password;
             if (!bcrypt.compareSync(password, hashedPassword.toString())) {
+              console.log('incorrect password')
                 return done(null, false);
             }
             

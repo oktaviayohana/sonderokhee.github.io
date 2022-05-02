@@ -18,7 +18,7 @@ exports.register = (req, res) => {
     let errors = [];
 
 
-    db.query('SELECT email FROM users WHERE email = ?', [mysql.escape(email)], async (error, result) => {
+    db.query('SELECT email FROM users WHERE email = ?', [email], async (error, result) => {
         if(error){
             console.log(error);
         }
@@ -40,7 +40,7 @@ exports.register = (req, res) => {
 
             bcrypt.genSalt(saltRounds, function(err, salt) {
                 bcrypt.hash(password, salt, function(err, hash) {
-                    db.query('INSERT INTO users set ?', {username: mysql.escape(username), email: mysql.escape(email), password: hash, }, (error, result) => {
+                    db.query('INSERT INTO users set ?', {username: username, email: email, password: hash, }, (error, result) => {
 
                         if(error){
                             console.log(error);
@@ -59,7 +59,7 @@ exports.register = (req, res) => {
 
 exports.getUserFromID = (user_id) => {
     return new Promise((resolve, reject) => {
-        db.query('SELECT * FROM users WHERE user_id = ?', [mysql.escape(user_id)], function(error, result) {
+        db.query('SELECT * FROM users WHERE user_id = ?', [user_id], function(error, result) {
             if (error) { return reject(error) }
             
             return resolve(result[0]);

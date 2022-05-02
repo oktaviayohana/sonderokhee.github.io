@@ -36,7 +36,6 @@ module.exports = {
                             data.push({ filename: element.filename, note_id: element.note_id, user_id: element.user_id, username: username, email: email })
 
                             //check if getUserFromID needs to run any more times, and call return function accordingly
-                            console.log(pending)
                             if (--pending === 0) {
                                 return resolve(data);
                             }

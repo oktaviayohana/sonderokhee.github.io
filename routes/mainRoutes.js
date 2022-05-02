@@ -51,15 +51,11 @@ router.get('/admin', async (req, res) => {
         noteCardInformation: await adminController.getAllNoteCardInformation()
     })
 });
-//download
-router.get('/admin/:filename', (req, res) => {
-    const filename = __dirname + '\\uploads\\notes_files\\' + req.params.filename
-
-    console.log('yess')
-    console.log(filename)
+//download CSV file
+router.get('/admin/download/:filename', (req, res) => {
+    const filename = './uploads/notes_files/' + req.params['filename']
 
     res.download(filename)
-    res.redirect('/admin')
 })
 
 
