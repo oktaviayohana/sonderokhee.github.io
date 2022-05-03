@@ -8,11 +8,29 @@
             <p> 
                 Note id: <%- note_id %>
                 <br>
-                User id: <%- user_id %>
+                Note Status: <%- status %>
                 <br>
                 User: <%- username %>
                 <br>
                 Email: <%- email %>
+                <br> 
+                <a href="/admin/download/<%= filename %>">Download CSV</a>
+                <br>
+                
+                <form action="/admin/updateNote" method="post" >
+                    <select name="note_status" required>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="processing">Processing</option>
+                        <option value="ready_to_ship">Ready To Ship</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    
+                    <input name="note_id" value=<%= note_id %>  type="hidden">
+                    <input type="submit" value="Update Order">
+                </form>
+
+                
             </p>
         </div>
     </body>

@@ -36,6 +36,7 @@ app.use(express.json());
 //Add routes
 const mainRoutes = require('./routes/mainRoutes');
 const user = require('./routes/user');
+const admin = require('./routes/admin');
 
 //Register View engine
 app.set('view engine', 'ejs');
@@ -64,6 +65,7 @@ app.use(fileUpload());
 //Use routes
 app.use(mainRoutes);
 app.use('/user', user);
+app.use('/admin', admin)
 
 //listen for requests
 const port = process.env.PORT || 3000

@@ -1,0 +1,25 @@
+Login system:
+ - Email Verification
+ - Forgot Password
+
+Admin Dashboard:
+ - Toggle show notes/campaigns
+
+Notifications
+
+User Dashboard:
+ - Get all notes owned by user (will have to render slightly different information from cards in admin panel)
+ - Get number of notes where note_status != pending
+ - Search through notes
+ - Everything above, but for campaigns
+ - Render profile picture
+
+User Settings:
+ - Cancel subscription !
+ - Change Password
+
+CSV upload:
+ - Drag and drop for file upload (probably a w3schools tutorial somewhere, should be easy)
+
+New Note/Campaign Confirmation Page:
+ - Check if user has correct subscription/amount of points

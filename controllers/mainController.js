@@ -21,7 +21,7 @@ exports.fileUpload = (req, res) => {
 
         //insert into db
         let note_id;
-        db.query(`INSERT INTO notes SET ?`, {filename: mysql.escape(req.files.csv.name), user_id: user_id, note_status: 'pending' }, function(err, result) {
+        db.query(`INSERT INTO notes SET ?`, {filename: req.files.csv.name, user_id: user_id, note_status: 'pending' }, function(err, result) {
             if (err) throw err;
             
             // rename file to format 'note*id*_user*id*

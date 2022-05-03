@@ -29,14 +29,10 @@ module.exports = {
                         if (error) throw (error)
 
                         if (result) {
-                            username = result.username
-                            email = result.email
-
                             //create new data entry and append to data array
-                            data.push({ note_id: element.note_id, user_id: element.user_id, username: username, email: email })
+                            data.push({ filename: element.filename, note_id: element.note_id, user_id: element.user_id, note_status: element.note_status, username: result.username, email: result.email })
 
                             //check if getUserFromID needs to run any more times, and call return function accordingly
-                            console.log(pending)
                             if (--pending === 0) {
                                 return resolve(data);
                             }
@@ -46,4 +42,12 @@ module.exports = {
             })
         })
     }, 
+
+    updateNoteStatus: (note_id, note_status) => {
+        db.query('UPDATE notes SET note_status = ? WHERE note_id = ?', [note_status, note_id], function(error) {
+            if (error) console.log(error)
+
+            console.log('note status updated to ' + note_status)
+        })
+    }
 }

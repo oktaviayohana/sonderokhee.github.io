@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/register', userController.register);
 router.post('/login',  passport.authenticate('local', {
-    failureRedirect: '/login',
+    failureRedirect: '/',
 }), function(req, res) {
     res.redirect('/')
 });
