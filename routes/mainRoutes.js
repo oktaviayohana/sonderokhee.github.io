@@ -48,7 +48,7 @@ router.get('/admin', async (req, res) => {
         title: 'Admin',
         user: req.user,
         userController: userController,
-        noteCardInformation: await adminController.getAllNoteCardInformation()
+        noteCardInformation: await adminController.getAllNoteCardInformation(),
     })
 });
 //download CSV file
