@@ -67,3 +67,23 @@ exports.getUserFromID = (user_id) => {
     })
 
 }
+
+//User Dashboard
+exports.getAllNotesByUser = async (req) => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM notes WHERE user_id = ?', [req.user.id], function(error, results) {
+            if (error) return reject(error);
+            
+            console.log(results.length)
+
+            if (results.length == 0) {
+                console.log('resolving as null: ' + results)
+                return resolve(null);
+            } else {
+                console.log('resolving as results: ' + results)
+                return resolve(results);
+            }
+        })
+    })
+    
+}
