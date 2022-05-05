@@ -210,7 +210,12 @@ background: #F0F1F7;
   cursor: pointer;
 }
 
-.footer{
+.card{
+height: auto;
+width: auto;
+background: #FFFFFF;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
+border-radius: 4px;
   
 }
     
