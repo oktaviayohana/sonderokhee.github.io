@@ -51,27 +51,22 @@
 <p class="text-med">8 notes are approved out of 10</p>
 </div>
 
-<div class="card">
+<% if (allNotes) { %>
+  <% allNotes.forEach(element => { %>
+    <%- include ('./partials/userDashboard/note_card', { note_id: element.note_id, filename: element.filename, status: element.note_status }); %>
+  <% }); %>
+<% } %>
+<% if (!allNotes) { %>
+  <p>No Notes Found</p>
+<% } %>
+<!-- <div class="card">
   <div class="content-data">
   <h5 class="text-large">Campaign 1 </h5>
   <p class="text-med">Due date : December, 2022</p>
   <p class="text-med">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
+</div> -->
 </div>
 <!-- <h2>Accordion</h2> -->
-
-<button class="accordion">Current Campaigns and Notes</button>
-<div class="panel">
-  <% if (allNotes) { %>
-    <% allNotes.forEach(element => { %>
-      <%- include ('./partials/userDashboard/note_card', { note_id: element.note_id, filename: element.filename, status: element.note_status }); %>
-    <% }); %>
-  <% } %>
-  <% if (!allNotes) { %>
-    <p>No Notes Found</p>
-  <% } %>
-  
-</div>
 
 <button class="accordion">Past Campaigns and Notes</button>
 <div class="panel">
