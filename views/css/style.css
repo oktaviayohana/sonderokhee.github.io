@@ -2,6 +2,10 @@ body {
   background-color: #f5f6f8;
 }
 
+.p{
+  margin-bottom: 0;
+  width: auto;
+}
 .new-note-btn {
   background-color: #21b499;
   margin: auto;
@@ -15,9 +19,9 @@ body {
 }
 
 .new-note-btn:hover {
-  -webkit-box-shadow: 0px 2px 4px 2px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow: 0px 2px 4px 2px #ccc; /* Firefox 3.5 - 3.6 */
-  box-shadow: 0px 2px 4px 2px #ccc;
+  -webkit-box-shadow: 1px 4px 6px 4px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 1px 4px 6px 4px #ccc; /* Firefox 3.5 - 3.6 */
+  box-shadow: 1px 4px 6px 4px #ccc;
 }
 .new-campaign-btn {
   background-color: #f24913;
@@ -32,9 +36,9 @@ body {
 }
 
 .new-campaign-btn:hover {
-  -webkit-box-shadow: 0px 2px 4px 2px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow: 0px 2px 4px 2px #ccc; /* Firefox 3.5 - 3.6 */
-  box-shadow: 0px 2px 4px 2px #ccc;
+  -webkit-box-shadow: 1px 4px 6px 4px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 1px 4px 6px 4px #ccc; /* Firefox 3.5 - 3.6 */
+  box-shadow: 1px 4px 6px 4px #ccc;
 }
 
 .navbar-btn {
@@ -55,15 +59,13 @@ body {
   width: 100%;
   height: 48px;
   color: white;
-  box-shadow: 0px 4px 12px #c9c9cb;
   border-radius: 10;
 }
 
 .btn:hover {
-  /* background-color: #F24913;
-  border-color: #F24913; */
-  box-shadow: 0px 2px 5px black;
-  color: white;
+  -webkit-box-shadow: 1px 4px 6px 4px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 1px 4px 6px 4px #ccc; /* Firefox 3.5 - 3.6 */
+  box-shadow: 1px 4px 6px 4px #ccc;
 }
 
 nav ul {
@@ -122,11 +124,11 @@ nav li a:hover {
 }
 
 .text-large {
-  font-size: 14px;
+  font-size: 2vhpx;
 }
 
 .text-med {
-  font-size: 12px;
+  font-size: 1.5vh;
 }
 
 .dashboard-btn-wrapper {
@@ -140,6 +142,38 @@ nav li a:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+/* Style the list */
+ul.breadcrumb {
+  padding: 5px 8px;
+  list-style: none;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+  display: inline;
+  font-size: 1.5vh;
+  color: #21b499;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li + li:before {
+  padding: 8px;
+  color: #a6acb1;
+  content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+  color: #a6acb1;
+  text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+  color: #86d3c5;
+  text-decoration: underline;
 }
 
 /* 
@@ -222,6 +256,11 @@ nav li a:hover {
     z-index: 1;
     border-radius: 2.5%;
   }
+  .avatar {
+    vertical-align: middle;
+    width: 3%;
+    height: 3%;
+    border-radius: 50%;
 }
 
 /* 

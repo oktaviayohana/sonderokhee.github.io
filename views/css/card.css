@@ -7,3 +7,14 @@
   border-width: 0;
   padding: 3vh;
 }
+
+.card-wrapper {
+}
+
+.status {
+  background-color: green;
+  display: flex;
+  border-radius: 5px;
+  color: whitesmoke;
+  padding: 1vh;
+}
